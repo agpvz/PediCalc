@@ -282,9 +282,9 @@ export const Warn = ({ children }) => (
   </div>
 );
 
-export function Drug({ name, conc, rows, note, children }) {
+export function Drug({ name, conc, rows, note, children, defaultOpen = false }) {
   const ex = !!children;
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(defaultOpen);
   return (
     <div
       style={{
