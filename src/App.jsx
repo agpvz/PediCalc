@@ -45,12 +45,14 @@ export default function App() {
   return (
     <div
       style={{
-        minHeight: "100vh",
+        minHeight: "100%",
         background: C.bg,
         color: C.t1,
         fontFamily: sans,
         maxWidth: 640,
         margin: "0 auto",
+        width: "100%",
+        overflowX: "hidden",
         WebkitFontSmoothing: "antialiased",
       }}
     >
@@ -58,7 +60,7 @@ export default function App() {
         href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=JetBrains+Mono:wght@400;500;700&display=swap"
         rel="stylesheet"
       />
-      <style>{`*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{opacity:1}::selection{background:${C.acc}40;color:#fff}::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:${C.bdr};border-radius:4px}`}</style>
+      <style>{`html,body{margin:0;padding:0;overflow-x:hidden;overscroll-behavior:none;background:${C.bg};-webkit-overflow-scrolling:touch;position:fixed;width:100%;height:100%}#root{width:100%;height:100%;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{opacity:1}::selection{background:${C.acc}40;color:#fff}::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:${C.bdr};border-radius:4px}`}</style>
 
       {/* Header */}
       <div
@@ -186,7 +188,7 @@ export default function App() {
       </div>
 
       {/* Content */}
-      <div style={{ padding: "8px 14px 100px" }}>
+      <div style={{ padding: "8px 14px 60px" }}>
         {tab === "standard" && <StdTab w={w} age={age} sex={sex} ht={ht} />}
         {tab === "addendum" && <AddTab w={w} age={age} />}
         {tab === "transfusion" && <TransTab w={w} age={age} />}
@@ -196,17 +198,15 @@ export default function App() {
       {/* Disclaimer + Credit */}
       <div
         style={{
-          padding: "10px 14px",
+          padding: "10px 14px env(safe-area-inset-bottom, 0px)",
           background: `${C.s1}ee`,
           borderTop: `1px solid ${C.bdr}`,
-          position: "fixed",
+          position: "sticky",
           bottom: 0,
-          left: 0,
-          right: 0,
-          maxWidth: 640,
-          margin: "0 auto",
+          width: "100%",
           backdropFilter: "blur(12px)",
           WebkitBackdropFilter: "blur(12px)",
+          zIndex: 99,
         }}
       >
         <p style={{ margin: 0, fontSize: 8, color: C.red, lineHeight: 1.5, fontWeight: 500, opacity: 0.8 }}>
