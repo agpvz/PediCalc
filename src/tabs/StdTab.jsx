@@ -28,8 +28,7 @@ export default function StdTab({ w, age, sex, ht }) {
     aM = age?.months ?? 0;
   const adrC = w <= 10 ? 1000 : w <= 20 ? 2000 : w <= 30 ? 3000 : w <= 40 ? 4000 : 5000;
   const adrLbl = w <= 10 ? "1mg/50ml" : w <= 20 ? "2mg/50ml" : w <= 30 ? "3mg/50ml" : w <= 40 ? "4mg/50ml" : "5mg/50ml";
-  const norC = w <= 10 ? 1000 : w <= 20 ? 2000 : w <= 30 ? 3000 : 4000;
-  const norLbl = w <= 10 ? "1mg/40ml" : w <= 20 ? "2mg/40ml" : w <= 30 ? "3mg/40ml" : "4mg/40ml";
+  const norConc = 1; // 1mg/ml
 
   let ettU = null, ettC2 = null;
   if (av) {
@@ -191,13 +190,13 @@ export default function StdTab({ w, age, sex, ht }) {
       </Sec>
 
       <Sec title="Vasopressors & Infusions" icon="📈">
-        <Drug name="Ephedrine" conc="3mg/ml" rows={[{ label: "0.05–0.1mg/kg", mg: `${R(0.05 * w)}–${R(0.1 * w)}`, ml: `${R((0.05 * w) / 3)}–${R((0.1 * w) / 3)}` }]} />
-        <Drug name="Phenylephrine" conc="50µg/ml" rows={[{ label: "2–3µg/kg", mg: `${R(2 * w)}–${R(3 * w)}`, ml: `${R((2 * w) / 50)}–${R((3 * w) / 50)}`, unit: "µg" }]} />
-        <Drug name="Noradrenaline" conc={norLbl} rows={[]}>
+        <Drug name="Ephedrine" conc="50mg/ml" rows={[{ label: "0.05–0.1mg/kg", mg: `${R(0.05 * w)}–${R(0.1 * w)}`, ml: `${R((0.05 * w) / 50)}–${R((0.1 * w) / 50)}` }]} />
+        <Drug name="Phenylephrine" conc="10mg/ml" rows={[{ label: "2–3µg/kg", mg: `${R(2 * w)}–${R(3 * w)}`, ml: `${R((2 * w) / 10000)}–${R((3 * w) / 10000)}`, unit: "µg" }]} />
+        <Drug name="Noradrenaline" conc="1mg/ml" rows={[{ label: "0.01–1µg/kg/min (infusion)", text: "Calc →", tc: C.acc }]}>
           <Inp label="Rate" value={norR} onChange={setNorR} min={0.01} max={1} step={0.01} unit="µg/kg/min" />
           <div style={{ display: "flex", gap: 5, marginTop: 5 }}>
             <Pill v={R(norR * w * 60)} u="µg/hr" c={C.acc} />
-            <Pill v={R((norR * w * 60) / (norC / 40))} u="ml/hr" c={C.grn} />
+            <Pill v={R((norR * w * 60) / (norConc * 1000))} u="ml/hr" c={C.grn} />
           </div>
         </Drug>
         <Drug name="Dexmedetomidine" rows={[{ label: "IN 2–4µg/kg (100µg/ml)", mg: `${R(2 * w)}–${R(4 * w)}`, ml: `${R((2 * w) / 100)}–${R((4 * w) / 100)}`, unit: "µg" }, { label: "IV bolus 0.5–2µg/kg (1µg/ml)", mg: `${R(0.5 * w)}–${R(2 * w)}`, ml: `${R(0.5 * w)}–${R(2 * w)}`, unit: "µg" }]}>
