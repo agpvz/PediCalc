@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { R, clamp, cap } from "../utils/helpers";
+import { R, R5, clamp, cap } from "../utils/helpers";
 import { HR, RR, vL, mL } from "../utils/vitals";
 import { C, mono, sans } from "../utils/theme";
 import { Pill, Tag, Badge, Inp, Sec, Warn, Drug } from "../components/UI";
@@ -35,7 +35,7 @@ export default function StdTab({ w, age, sex, ht }) {
     if (ay < 1 && w <= 3) { ettU = 3; ettC2 = 2.5; }
     else if (ay < 1) { ettU = 3.5; ettC2 = 3; }
     else if (ay < 2) { ettU = 4; ettC2 = 3.5; }
-    else { ettU = R(4 + ay / 4, 1); ettC2 = R(3.5 + ay / 4, 1); }
+    else { ettU = R5(4 + ay / 4); ettC2 = R5(3.5 + ay / 4); }
   }
 
   let ettO = null;
