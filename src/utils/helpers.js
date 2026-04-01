@@ -6,6 +6,10 @@
 export const R = (v, d = 2) =>
   typeof v !== "number" || isNaN(v) ? "—" : parseFloat(v.toFixed(d));
 
+/** Round to nearest 0.5 (for ETT sizes) */
+export const R5 = (v) =>
+  typeof v !== "number" || isNaN(v) ? "—" : Math.round(v * 2) / 2;
+
 /** Clamp value between lo and hi */
 export const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
