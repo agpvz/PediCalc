@@ -123,6 +123,8 @@ export default function InoTab({ w, age }) {
           conc="default 100µg/ml"
           rows={[
             { label: "0.33–0.75 µg/kg/min", text: "inodilator", tc: C.vio },
+            { label: "Preterm: 0.75 → 0.15–0.2 µg/kg/min" },
+            { label: "Term: 1.25 → 0.25–0.75 µg/kg/min" },
           ]}
           note={
             <>
