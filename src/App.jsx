@@ -158,36 +158,42 @@ export default function App() {
           {sex === "2" && <Tag c={C.pink}>♀ Female</Tag>}
         </div>
 
-        {/* Tabs */}
-        <div style={{ display: "flex", gap: 3, background: C.bg, borderRadius: 10, padding: 3 }}>
-          {tabs.map((t) => (
-            <button
-              key={t.id}
-              onClick={() => setTab(t.id)}
-              style={{
-                flex: 1,
-                padding: "8px 4px",
-                borderRadius: 8,
-                border: "none",
-                cursor: "pointer",
-                background: tab === t.id ? `linear-gradient(135deg,${C.acc},${C.vio})` : "transparent",
-                color: tab === t.id ? "#fff" : C.t3,
-                fontSize: 10,
-                fontWeight: 700,
-                fontFamily: sans,
-                transition: "all 0.2s",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 2,
-                WebkitTapHighlightColor: "transparent",
-                boxShadow: tab === t.id ? "0 2px 8px rgba(88,166,255,0.2)" : "none",
-              }}
-            >
-              <span style={{ fontSize: 14, lineHeight: 1 }}>{t.i}</span>
-              {t.l}
-            </button>
-          ))}
+        {/* Tabs — 3×2 grid so all six fit with full labels on phones */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 4, background: C.bg, borderRadius: 12, padding: 4 }}>
+          {tabs.map((t) => {
+            const active = tab === t.id;
+            return (
+              <button
+                key={t.id}
+                onClick={() => setTab(t.id)}
+                style={{
+                  padding: "8px 4px",
+                  borderRadius: 9,
+                  border: `1px solid ${active ? "transparent" : C.bdr}`,
+                  cursor: "pointer",
+                  background: active ? `linear-gradient(135deg,${C.acc},${C.vio})` : C.s1,
+                  color: active ? "#fff" : C.t2,
+                  fontSize: 10,
+                  fontWeight: 700,
+                  fontFamily: sans,
+                  letterSpacing: "-0.01em",
+                  transition: "all 0.2s",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 4,
+                  minHeight: 48,
+                  whiteSpace: "nowrap",
+                  WebkitTapHighlightColor: "transparent",
+                  boxShadow: active ? "0 2px 10px rgba(88,166,255,0.28)" : "none",
+                }}
+              >
+                <span style={{ fontSize: 16, lineHeight: 1, opacity: active ? 1 : 0.85 }}>{t.i}</span>
+                {t.l}
+              </button>
+            );
+          })}
         </div>
       </div>
 
