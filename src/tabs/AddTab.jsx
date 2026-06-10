@@ -26,7 +26,8 @@ export default function AddTab({ w, age }) {
 
       <Sec title="Other" icon="💊">
         <Drug name="Dantrolene" conc="≈0.33mg/ml" rows={[{ label: "MH 2.5mg/kg ×3", mg: R(2.5 * w), ml: R((2.5 * w) / (20 / 60)) }]} note="20mg in 60ml sterile H₂O" />
-        <Drug name="Sufentanil" conc="5µg/ml" rows={[{ label: "0.1–0.2–0.5µg/kg", mg: `${R(0.1 * w)}–${R(0.2 * w)}–${R(0.5 * w)}`, ml: `${R((0.1 * w) / 5)}–${R((0.2 * w) / 5)}–${R((0.5 * w) / 5)}`, unit: "µg" }]} />
+        <Drug name="Sufentanil" conc="5µg/ml" rows={[{ label: "Bolus 0.1–0.2–0.5µg/kg", mg: `${R(0.1 * w)}–${R(0.2 * w)}–${R(0.5 * w)}`, ml: `${R((0.1 * w) / 5)}–${R((0.2 * w) / 5)}–${R((0.5 * w) / 5)}`, unit: "µg" }, { label: w < 20 ? "Infusion <20kg (1µg/ml)" : "Infusion >20kg (1µg/ml)", mg: w < 20 ? 10 : 20, unit: "ml/hr" }]} note="Infusion: dilute 10ml of 5µg/ml to 50ml = 1µg/ml. Stop 20min before end" />
+        <Drug name="Caffeine citrate" rows={[{ label: "Apnoea ppx 20mg/kg PO", mg: R(20 * w), unit: "mg" }, { label: "Maint 5–10mg/kg OD ×48h post-op", mg: `${R(5 * w)}–${R(10 * w)}`, unit: "mg" }]} note="Premature <60wk post-conceptional age" />
       </Sec>
     </div>
   );

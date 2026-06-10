@@ -68,7 +68,7 @@ export default function TransTab({ w, age }) {
       </Sec>
 
       <Sec title="Transfusion Products" icon="🏥">
-        <Drug name="RBC" rows={[{ label: "10–15ml/kg", mg: `${R(10 * w)}–${R(15 * w)}`, unit: "ml" }, { label: "3.3ml/kg = +1g/dl Hb", mg: R(3.3 * w), unit: "ml" }, { label: "Rate 5ml/kg/hr", mg: R(5 * w), unit: "ml/hr" }]} />
+        <Drug name="RBC" rows={[{ label: "10–15ml/kg", mg: `${R(10 * w)}–${R(15 * w)}`, unit: "ml" }, { label: "(Desired−Actual Hb)×kg×4 ≈ 4ml/kg per g/dl", mg: R(4 * w), unit: "ml" }, { label: "Rate 5ml/kg/hr", mg: R(5 * w), unit: "ml/hr" }]} />
         <Drug name="Plasma" rows={[{ label: "12–15ml/kg", mg: `${R(12 * w)}–${R(15 * w)}`, unit: "ml" }, { label: "Rate 10–20ml/kg/hr", mg: `${R(10 * w)}–${R(20 * w)}`, unit: "ml/hr" }]} />
         <Drug name="Platelets" rows={[{ label: "10–20ml/kg", mg: `${R(10 * w)}–${R(20 * w)}`, unit: "ml" }, { label: "Rate 10–20ml/kg/hr", mg: `${R(10 * w)}–${R(20 * w)}`, unit: "ml/hr" }]} />
         <Drug name="Fibrinogen (RiaStap® 20mg/ml)" rows={[{ label: "Unknown fib: 70mg/kg", mg: R(70 * w), ml: R((70 * w) / 20) }]}>
@@ -83,6 +83,12 @@ export default function TransTab({ w, age }) {
           </div>
           <div style={{ fontSize: 9, color: C.t3, marginTop: 3 }}>Max 100mg/min (5ml/min)</div>
         </Drug>
+      </Sec>
+
+      <Sec title="Massive Transfusion (MTP)" icon="🚨" defaultOpen={false}>
+        <Drug name="Pack 1" rows={[{ label: "Packed RBC 30ml/kg", mg: R(30 * w), unit: "ml" }, { label: "FFP 15ml/kg", mg: R(15 * w), unit: "ml" }]} />
+        <Drug name="Pack 2 (ongoing bleeding)" rows={[{ label: "Cryoprecipitate 4 units/kg", mg: R(4 * w), unit: "units" }, { label: "Platelets 10ml/kg", mg: R(10 * w), unit: "ml" }]} />
+        <Drug name="Adjuncts" rows={[{ label: "Tranexamic acid 10mg/kg", mg: R(10 * w), ml: R((10 * w) / 100) }]} note="Alert switchboard · blood warmer · ABG ½-hrly (K⁺/Ca²⁺). Trigger: loss >40ml/kg or >20ml/kg/hr" />
       </Sec>
 
       <div style={{ background: C.ornS, borderRadius: 8, padding: 10, border: "1px solid rgba(245,158,11,0.15)", marginTop: 10 }}>

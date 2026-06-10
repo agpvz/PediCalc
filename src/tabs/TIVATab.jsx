@@ -3,7 +3,7 @@ import { R } from "../utils/helpers";
 import { C, mono } from "../utils/theme";
 import { Pill, Badge, Inp, Sec, Warn, Drug } from "../components/UI";
 
-export default function TIVATab({ w, age, ht, sex }) {
+export default function TIVATab({ w, age }) {
   const ok = w >= 1 && w <= 45,
     av = age !== null,
     ay = age?.totalYears ?? 0;
@@ -168,6 +168,32 @@ export default function TIVATab({ w, age, ht, sex }) {
           </div>
           <div style={{ display: "flex", gap: 5, marginTop: 6 }}>
             <Pill v={rMl} u="ml/hr" c={C.grn} />
+          </div>
+        </div>
+      </Sec>
+
+      <Sec title="Ketamine TIVA (RCWMCH)" icon="🔬" defaultOpen={false}>
+        <div style={{ background: C.s1, borderRadius: 8, border: `1px solid ${C.bdr}`, padding: 10 }}>
+          <div style={{ fontSize: 11, color: C.t2, marginBottom: 6 }}>
+            200mg in 50ml N/Saline = 4mg/ml (consider 8mg/ml for bigger kids / longer cases)
+          </div>
+          <div style={{ fontSize: 11, color: C.t2, marginBottom: 8 }}>
+            Induction 1–2mg/kg: <Pill v={`${R(w)}–${R(2 * w)}`} u="mg" /> ={" "}
+            <Pill v={`${R(w / 4)}–${R((2 * w) / 4)}`} u="ml" c={C.grn} />
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "auto 1fr 1fr", gap: "2px 8px", fontSize: 11 }}>
+            <span style={{ fontWeight: 700, color: C.t3 }}>Phase</span>
+            <span style={{ fontWeight: 700, color: C.t3 }}>mg/kg/hr</span>
+            <span style={{ fontWeight: 700, color: C.t3 }}>ml/hr (4mg/ml)</span>
+            <span style={{ color: C.t2 }}>0–20 min</span>
+            <span style={{ color: C.acc, fontFamily: mono }}>12</span>
+            <span style={{ color: C.grn, fontFamily: mono, fontWeight: 700 }}>{R((12 * w) / 4)}</span>
+            <span style={{ color: C.t2 }}>20–40 min</span>
+            <span style={{ color: C.acc, fontFamily: mono }}>8</span>
+            <span style={{ color: C.grn, fontFamily: mono, fontWeight: 700 }}>{R((8 * w) / 4)}</span>
+            <span style={{ color: C.t2 }}>&gt;40 min</span>
+            <span style={{ color: C.acc, fontFamily: mono }}>4</span>
+            <span style={{ color: C.grn, fontFamily: mono, fontWeight: 700 }}>{R((4 * w) / 4)}</span>
           </div>
         </div>
       </Sec>
