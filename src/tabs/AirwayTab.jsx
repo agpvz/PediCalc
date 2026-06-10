@@ -1,11 +1,13 @@
+import { useState } from "react";
 import { R, R5 } from "../utils/helpers";
-import { C } from "../utils/theme";
+import { C, sans } from "../utils/theme";
 import { Badge, Sec } from "../components/UI";
 
 export default function AirwayTab({ w, age, ht }) {
   const ok = w >= 1 && w <= 45,
     av = age !== null,
     hv = ht >= 20 && ht <= 150;
+  const [cvcSite, setCvcSite] = useState("central");
 
   if (!ok)
     return (
@@ -44,11 +46,15 @@ export default function AirwayTab({ w, age, ht }) {
 
   const lma = w <= 5 ? 1 : w <= 10 ? 1.5 : w <= 20 ? 2 : w <= 30 ? 2.5 : w <= 50 ? 3 : null;
 
-  // CVC insertion depth — Peres' formula (height/10) for right-sided IJ/subclavian.
+  // CVC sizing — weight-based French gauge (single recommended value per chart band).
+  const cvcFr = w < 5 ? 4 : w < 10 ? 5 : w <= 20 ? 5.5 : 7;
+  // IJ/subclavian: insertion depth = Peres' formula (height/10), right-sided.
   // Recommended catheter length = smallest standard size that accommodates the depth.
   const cvcDepth = ht / 10;
   const cvcSizes = [5, 8, 13, 15];
   const cvcLen = cvcSizes.find((l) => l >= cvcDepth) ?? cvcSizes[cvcSizes.length - 1];
+  // Femoral: weight-based catheter length (longer than central), per chart band.
+  const femLen = w < 3 ? "8–12" : w < 5 ? "12" : w < 10 ? "12–15" : w <= 20 ? "15–20" : "20–30";
 
   return (
     <div>
@@ -67,19 +73,49 @@ export default function AirwayTab({ w, age, ht }) {
         </div>
       </Sec>
 
-      <Sec title="CVC" icon="🔗" warn={!av || !hv ? "Need age+height" : undefined}>
-        <div style={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
-          {av && <Badge l="Gauge" v={ay < 0.25 ? "4Fr" : "5Fr"} c={C.acc} />}
-          {hv && <Badge l="Catheter" v={`${cvcLen}cm`} c={C.grn} />}
-          {hv && <Badge l="Insert depth" v={`${R(cvcDepth, 1)}cm`} c={C.orn} />}
+      <Sec title="CVC" icon="🔗" warn={cvcSite === "central" && !hv ? "Need height" : undefined}>
+        {/* Insertion site */}
+        <div style={{ display: "flex", gap: 3, marginBottom: 6 }}>
+          {[["central", "IJ / Subclavian"], ["femoral", "Femoral"]].map(([s, l]) => (
+            <button
+              key={s}
+              onClick={() => setCvcSite(s)}
+              style={{
+                flex: 1,
+                padding: "5px 8px",
+                borderRadius: 7,
+                border: `1px solid ${cvcSite === s ? C.acc + "60" : C.bdr}`,
+                background: cvcSite === s ? C.accS : "transparent",
+                color: cvcSite === s ? C.acc : C.t3,
+                fontSize: 10,
+                fontWeight: 700,
+                cursor: "pointer",
+                fontFamily: sans,
+                transition: "all 0.15s",
+                WebkitTapHighlightColor: "transparent",
+              }}
+            >
+              {l}
+            </button>
+          ))}
         </div>
-        {hv && (
-          <div style={{ marginTop: 6, fontSize: 9, color: C.t3, lineHeight: 1.5, padding: "0 2px" }}>
-            Insert depth = height ÷ 10 (Peres', right-sided IJ/subclavian). Catheter = smallest standard
-            length (5/8/13/15 cm) that accommodates the depth. Add ~1 cm for left-sided lines; confirm tip
-            position radiologically.
-          </div>
-        )}
+        <div style={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
+          <Badge l="Gauge" v={`${cvcFr}Fr`} c={C.acc} />
+          {cvcSite === "central" ? (
+            <>
+              {hv && <Badge l="Catheter" v={`${cvcLen}cm`} c={C.grn} />}
+              {hv && <Badge l="Insert depth" v={`${R(cvcDepth, 1)}cm`} c={C.orn} />}
+            </>
+          ) : (
+            <Badge l="Catheter length" v={`${femLen}cm`} c={C.grn} />
+          )}
+        </div>
+        <div style={{ marginTop: 6, fontSize: 9, color: C.t3, lineHeight: 1.5, padding: "0 2px" }}>
+          {cvcSite === "central"
+            ? "IJ/SC insert depth = height ÷ 10 (Peres', right-sided). Catheter = smallest standard length (5/8/13/15 cm) that accommodates the depth; add ~1 cm for left-sided lines. "
+            : "Femoral catheter length is weight-based and longer than central; aim for tip in the IVC below the diaphragm. "}
+          Fr gauge is weight-based — confirm tip position radiologically.
+        </div>
       </Sec>
     </div>
   );
