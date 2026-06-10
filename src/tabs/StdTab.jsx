@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { R, R5, clamp, cap } from "../utils/helpers";
+import { R, clamp, cap } from "../utils/helpers";
 import { HR, RR, vL, mL } from "../utils/vitals";
-import { C, mono, sans } from "../utils/theme";
+import { C } from "../utils/theme";
 import { Pill, Tag, Badge, Inp, Sec, Warn, Drug } from "../components/UI";
 
-export default function StdTab({ w, age, sex, ht }) {
+export default function StdTab({ w, age, sex }) {
   const ok = w >= 1 && w <= 45,
-    av = age !== null,
-    hv = ht >= 20 && ht <= 150;
+    av = age !== null;
   const [adrR, setAdrR] = useState(0.1),
     [norR, setNorR] = useState(0.01),
     [dexR, setDexR] = useState(0.5);
@@ -29,57 +28,10 @@ export default function StdTab({ w, age, sex, ht }) {
   const adrC = w <= 10 ? 1000 : w <= 20 ? 2000 : w <= 30 ? 3000 : w <= 40 ? 4000 : 5000;
   const adrLbl = w <= 10 ? "1mg/50ml" : w <= 20 ? "2mg/50ml" : w <= 30 ? "3mg/50ml" : w <= 40 ? "4mg/50ml" : "5mg/50ml";
   const norConc = 1; // 1mg/ml
-
-  let ettU = null, ettC2 = null;
-  if (av) {
-    if (ay < 1 && w <= 3) { ettU = 3; ettC2 = 2.5; }
-    else if (ay < 1) { ettU = 3.5; ettC2 = 3; }
-    else if (ay < 2) { ettU = 4; ettC2 = 3.5; }
-    else { ettU = R5(4 + ay / 4); ettC2 = R5(3.5 + ay / 4); }
-  }
-
-  let ettO = null;
-  if (av) {
-    if (ay < 1) { ettO = w <= 1 ? 6 : w <= 2 ? 7 : w <= 3 ? 8.5 : w <= 3.5 ? 9 : 10; }
-    else if (ay < 2) ettO = 11;
-    else ettO = R(12 + ay / 2, 1);
-  }
-
-  let ettN = null;
-  if (av) {
-    if (ay < 1) { ettN = w <= 1 ? 7.5 : w <= 2 ? 9 : w <= 3 ? 10.5 : w <= 3.5 ? 11 : 12; }
-    else if (ay < 2) ettN = 14;
-    else ettN = R(15 + ay / 2, 1);
-  }
-
-  const lma = w <= 5 ? 1 : w <= 10 ? 1.5 : w <= 20 ? 2 : w <= 30 ? 2.5 : w <= 50 ? 3 : null;
   const mf = w <= 10 ? w * 4 : w <= 20 ? 40 + 2 * (w - 10) : 60 + (w - 20);
 
   return (
     <div>
-      <Sec title="Airway & Equipment" icon="🫁" warn={!av ? "Need age" : undefined}>
-        <div style={{ display: "flex", gap: 5, flexWrap: "wrap", marginBottom: 6 }}>
-          <Badge l="ETT∅ uncuff" v={ettU} c={C.acc} />
-          <Badge l="ETT∅ cuff" v={ettC2} c={C.grn} />
-          <Badge l="Depth oral" v={ettO} c={C.orn} />
-          <Badge l="Depth nasal" v={ettN} c={C.vio} />
-          <Badge l="LMA" v={lma} c={C.pink} />
-        </div>
-        <div style={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
-          <Badge l="Defib" v={`${R(4 * w, 0)}J`} c={C.red} />
-          <Badge l="Cardiov 1st" v={`${R(0.5 * w, 0)}–${R(w, 0)}J`} c={C.red} />
-          <Badge l="Paddles" v={w <= 10 ? "Peds" : "Adult"} c={C.t2} />
-        </div>
-      </Sec>
-
-      <Sec title="CVC" icon="🔗" warn={!av || !hv ? "Need age+height" : undefined}>
-        <div style={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
-          {av && <Badge l="Gauge" v={ay < 0.25 ? "4Fr" : "5Fr"} c={C.acc} />}
-          {hv && <Badge l="Catheter" v={ht <= 50 ? "5cm" : "8cm"} c={C.grn} />}
-          {hv && <Badge l="Insert" v={`${R(ht / 10, 1)}cm`} c={C.orn} />}
-        </div>
-      </Sec>
-
       <Sec title="Fluids" icon="💧">
         {/* Setup */}
         <div style={{ background: C.s1, borderRadius: 8, border: `1px solid ${C.bdr}`, padding: "8px 10px", marginBottom: 3 }}>
