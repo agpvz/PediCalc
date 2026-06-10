@@ -1,13 +1,11 @@
-import { useState } from "react";
 import { R } from "../utils/helpers";
-import { C, mono } from "../utils/theme";
-import { Pill, Inp, Sec, Drug } from "../components/UI";
+import { C } from "../utils/theme";
+import { Sec, Drug } from "../components/UI";
 
 export default function AddTab({ w, age }) {
   const ok = w >= 1 && w <= 45,
     av = age !== null,
     ay = age?.totalYears ?? 0;
-  const [milR, setMilR] = useState(1.25);
 
   if (!ok)
     return (
@@ -29,13 +27,6 @@ export default function AddTab({ w, age }) {
       <Sec title="Other" icon="💊">
         <Drug name="Dantrolene" conc="≈0.33mg/ml" rows={[{ label: "MH 2.5mg/kg ×3", mg: R(2.5 * w), ml: R((2.5 * w) / (20 / 60)) }]} note="20mg in 60ml sterile H₂O" />
         <Drug name="Sufentanil" conc="5µg/ml" rows={[{ label: "0.1–0.2–0.5µg/kg", mg: `${R(0.1 * w)}–${R(0.2 * w)}–${R(0.5 * w)}`, ml: `${R((0.1 * w) / 5)}–${R((0.2 * w) / 5)}–${R((0.5 * w) / 5)}`, unit: "µg" }]} />
-        <Drug name="Milrinone" conc="5mg/50ml" rows={[{ label: "Preterm: 0.75→0.15–0.2 µg/kg/min", text: "Calc →", tc: C.acc }, { label: "Term: 1.25→0.25–0.75 µg/kg/min", text: "Calc →", tc: C.acc }]}>
-          <Inp label="Rate" value={milR} onChange={setMilR} min={0.1} max={2} step={0.05} unit="µg/kg/min" />
-          <div style={{ display: "flex", gap: 5, marginTop: 5 }}>
-            <Pill v={R(milR * w * 60)} u="µg/hr" c={C.acc} />
-            <Pill v={R((milR * w * 60) / 100)} u="ml/hr" c={C.grn} />
-          </div>
-        </Drug>
       </Sec>
     </div>
   );

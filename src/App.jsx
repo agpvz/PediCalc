@@ -4,6 +4,7 @@ import { C, sans } from "./utils/theme";
 import { Inp, Sel, Tag } from "./components/UI";
 import StdTab from "./tabs/StdTab";
 import AddTab from "./tabs/AddTab";
+import InoTab from "./tabs/InoTab";
 import TransTab from "./tabs/TransTab";
 import TIVATab from "./tabs/TIVATab";
 
@@ -38,6 +39,7 @@ export default function App() {
   const tabs = [
     { id: "standard", l: "Standard", i: "💊" },
     { id: "addendum", l: "Addendum", i: "🦠" },
+    { id: "inotropy", l: "Inotropes", i: "❤️" },
     { id: "transfusion", l: "Transfusion", i: "🩸" },
     { id: "tiva", l: "TIVA", i: "🎯" },
   ];
@@ -191,6 +193,7 @@ export default function App() {
       <div style={{ padding: "8px 14px 60px" }}>
         {tab === "standard" && <StdTab w={w} age={age} sex={sex} ht={ht} />}
         {tab === "addendum" && <AddTab w={w} age={age} />}
+        {tab === "inotropy" && <InoTab w={w} age={age} />}
         {tab === "transfusion" && <TransTab w={w} age={age} />}
         {tab === "tiva" && <TIVATab w={w} age={age} ht={ht} sex={sex} />}
       </div>
