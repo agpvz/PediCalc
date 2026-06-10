@@ -44,6 +44,12 @@ export default function AirwayTab({ w, age, ht }) {
 
   const lma = w <= 5 ? 1 : w <= 10 ? 1.5 : w <= 20 ? 2 : w <= 30 ? 2.5 : w <= 50 ? 3 : null;
 
+  // CVC insertion depth — Peres' formula (height/10) for right-sided IJ/subclavian.
+  // Recommended catheter length = smallest standard size that accommodates the depth.
+  const cvcDepth = ht / 10;
+  const cvcSizes = [5, 8, 13, 15];
+  const cvcLen = cvcSizes.find((l) => l >= cvcDepth) ?? cvcSizes[cvcSizes.length - 1];
+
   return (
     <div>
       <Sec title="Airway & Equipment" icon="🫁" warn={!av ? "Need age" : undefined}>
@@ -64,9 +70,16 @@ export default function AirwayTab({ w, age, ht }) {
       <Sec title="CVC" icon="🔗" warn={!av || !hv ? "Need age+height" : undefined}>
         <div style={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
           {av && <Badge l="Gauge" v={ay < 0.25 ? "4Fr" : "5Fr"} c={C.acc} />}
-          {hv && <Badge l="Catheter" v={ht <= 50 ? "5cm" : "8cm"} c={C.grn} />}
-          {hv && <Badge l="Insert" v={`${R(ht / 10, 1)}cm`} c={C.orn} />}
+          {hv && <Badge l="Catheter" v={`${cvcLen}cm`} c={C.grn} />}
+          {hv && <Badge l="Insert depth" v={`${R(cvcDepth, 1)}cm`} c={C.orn} />}
         </div>
+        {hv && (
+          <div style={{ marginTop: 6, fontSize: 9, color: C.t3, lineHeight: 1.5, padding: "0 2px" }}>
+            Insert depth = height ÷ 10 (Peres', right-sided IJ/subclavian). Catheter = smallest standard
+            length (5/8/13/15 cm) that accommodates the depth. Add ~1 cm for left-sided lines; confirm tip
+            position radiologically.
+          </div>
+        )}
       </Sec>
     </div>
   );
