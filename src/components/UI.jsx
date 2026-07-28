@@ -11,7 +11,7 @@ export const Pill = ({ v, u, c = C.acc }) => (
       borderRadius: 6,
       padding: "2px 8px",
       fontFamily: mono,
-      fontSize: 12,
+      fontSize: 13,
       fontWeight: 700,
       color: c,
       whiteSpace: "nowrap",
@@ -21,7 +21,7 @@ export const Pill = ({ v, u, c = C.acc }) => (
   >
     {v}
     {u && (
-      <span style={{ fontSize: 9, fontWeight: 600, opacity: 0.6, marginLeft: 1 }}>
+      <span style={{ fontSize: 11, fontWeight: 700, opacity: 0.9, marginLeft: 2 }}>
         {u}
       </span>
     )}
@@ -31,7 +31,7 @@ export const Pill = ({ v, u, c = C.acc }) => (
 export const Tag = ({ children, c = C.t3 }) => (
   <span
     style={{
-      fontSize: 9,
+      fontSize: 10,
       fontWeight: 700,
       color: c,
       background: `${c}18`,
@@ -65,7 +65,7 @@ export function Badge({ l, v, c = C.acc }) {
     >
       <span
         style={{
-          fontSize: 7,
+          fontSize: 8,
           fontWeight: 700,
           color: C.t3,
           textTransform: "uppercase",
@@ -96,7 +96,7 @@ export function Inp({ label, value, onChange, type = "number", unit, placeholder
       {label && (
         <label
           style={{
-            fontSize: 9,
+            fontSize: 10,
             fontWeight: 700,
             color: C.t3,
             textTransform: "uppercase",
@@ -140,7 +140,7 @@ export function Inp({ label, value, onChange, type = "number", unit, placeholder
             border: "none",
             outline: "none",
             color: C.t1,
-            fontSize: 14,
+            fontSize: 16,
             fontFamily: mono,
             fontWeight: 600,
             width: "100%",
@@ -161,7 +161,7 @@ export function Sel({ label, value, onChange, options }) {
     <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
       <label
         style={{
-          fontSize: 9,
+          fontSize: 10,
           fontWeight: 700,
           color: C.t3,
           textTransform: "uppercase",
@@ -177,9 +177,9 @@ export function Sel({ label, value, onChange, options }) {
           background: C.s2,
           border: `1px solid ${C.bdr}`,
           borderRadius: 8,
-          padding: "7px 10px",
+          padding: "8px 10px",
           color: C.t1,
-          fontSize: 13,
+          fontSize: 16,
           outline: "none",
           cursor: "pointer",
           appearance: "none",
@@ -210,7 +210,7 @@ export function Sec({ title, icon, children, warn, defaultOpen = true }) {
           alignItems: "center",
           gap: 6,
           marginBottom: open ? 8 : 2,
-          padding: "6px 2px",
+          padding: "10px 2px",
           background: "transparent",
           border: "none",
           cursor: "pointer",
@@ -226,7 +226,7 @@ export function Sec({ title, icon, children, warn, defaultOpen = true }) {
         {icon && <span style={{ fontSize: 15, lineHeight: 1 }}>{icon}</span>}
         <span
           style={{
-            fontSize: 11,
+            fontSize: 12,
             fontWeight: 800,
             color: open ? C.t1 : C.t2,
             textTransform: "uppercase",
@@ -241,7 +241,7 @@ export function Sec({ title, icon, children, warn, defaultOpen = true }) {
         {warn && <Tag c={C.orn}>{warn}</Tag>}
         <span
           style={{
-            fontSize: 10,
+            fontSize: 12,
             color: C.t3,
             transition: "transform 0.2s",
             transform: open ? "rotate(0)" : "rotate(-90deg)",
@@ -271,7 +271,7 @@ export const Warn = ({ children }) => (
       background: C.ornS,
       borderRadius: 8,
       padding: "6px 10px",
-      fontSize: 10,
+      fontSize: 11,
       color: C.orn,
       fontWeight: 600,
       marginBottom: 6,
@@ -308,7 +308,7 @@ export function Drug({ name, conc, rows, note, children, defaultOpen = false }) 
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-            <span style={{ fontSize: 13, fontWeight: 700, color: C.t1, fontFamily: sans }}>
+            <span style={{ fontSize: 14, fontWeight: 700, color: C.t1, fontFamily: sans }}>
               {name}
             </span>
             {conc && <Tag>{conc}</Tag>}
@@ -319,11 +319,11 @@ export function Drug({ name, conc, rows, note, children, defaultOpen = false }) 
               style={{
                 background: open ? C.accM : C.s3,
                 border: `1px solid ${open ? C.acc + "40" : C.bdr}`,
-                borderRadius: 6,
-                padding: "3px 10px",
+                borderRadius: 7,
+                padding: "7px 14px",
                 cursor: "pointer",
                 color: open ? C.acc : C.t3,
-                fontSize: 9,
+                fontSize: 11,
                 fontWeight: 700,
                 fontFamily: sans,
                 transition: "all 0.15s",
@@ -334,7 +334,7 @@ export function Drug({ name, conc, rows, note, children, defaultOpen = false }) 
             </button>
           )}
         </div>
-        {note && <div style={{ fontSize: 10, color: C.orn, marginBottom: 4, fontWeight: 500 }}>{note}</div>}
+        {note && <div style={{ fontSize: 11, color: C.orn, marginBottom: 4, fontWeight: 500 }}>{note}</div>}
         {rows.map((r, i) => (
           <div
             key={i}
@@ -343,12 +343,12 @@ export function Drug({ name, conc, rows, note, children, defaultOpen = false }) 
               alignItems: "center",
               justifyContent: "space-between",
               gap: 6,
-              padding: "4px 0",
+              padding: "5px 0",
               borderTop: i ? `1px solid ${C.bdr}55` : "none",
               flexWrap: "wrap",
             }}
           >
-            <span style={{ fontSize: 11, color: C.t2, flex: 1, minWidth: 100, lineHeight: 1.4 }}>
+            <span style={{ fontSize: 12, color: C.t2, flex: 1, minWidth: 100, lineHeight: 1.4 }}>
               {r.label}
             </span>
             <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
