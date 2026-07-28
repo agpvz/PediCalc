@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { calcAge, ageStr, ageCat } from "./utils/helpers";
 import { C, sans } from "./utils/theme";
 import { Inp, Sel, Tag } from "./components/UI";
+import VitalSigns from "./components/VitalSigns";
 import StdTab from "./tabs/StdTab";
 import InductionTab from "./tabs/InductionTab";
 import AnalgesiaTab from "./tabs/AnalgesiaTab";
@@ -207,7 +208,8 @@ export default function App() {
 
       {/* Content */}
       <div style={{ padding: "8px 14px 60px" }}>
-        {tab === "standard" && <StdTab w={w} age={age} sex={sex} />}
+        {wOk && aOk && <VitalSigns w={w} age={age} sex={sex} />}
+        {tab === "standard" && <StdTab w={w} age={age} />}
         {tab === "induction" && <InductionTab w={w} age={age} />}
         {tab === "analgesia" && <AnalgesiaTab w={w} age={age} />}
         {tab === "emergency" && <EmergencyTab w={w} age={age} />}

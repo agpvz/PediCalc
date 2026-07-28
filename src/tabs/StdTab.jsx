@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { R, cap } from "../utils/helpers";
-import { HR, RR, vL, mL } from "../utils/vitals";
 import { C } from "../utils/theme";
-import { Pill, Badge, Inp, Sec, Warn, Drug } from "../components/UI";
+import { Pill, Inp, Sec, Drug } from "../components/UI";
 
-export default function StdTab({ w, age, sex }) {
+export default function StdTab({ w, age }) {
   const ok = w >= 1 && w <= 45,
     av = age !== null;
   const [norR, setNorR] = useState(0.01),
@@ -21,9 +20,7 @@ export default function StdTab({ w, age, sex }) {
       </div>
     );
 
-  const ay = age?.totalYears ?? 0,
-    aY = age?.years ?? 0,
-    aM = age?.months ?? 0;
+  const ay = age?.totalYears ?? 0;
   const norConc = 1; // 1mg/ml
 
   return (
@@ -75,44 +72,6 @@ export default function StdTab({ w, age, sex }) {
         <Drug name="Salbutamol + Ipratropium" conc="aerosol" rows={av && ay < 5 ? [{ label: "<5yr", text: "2.5mg salb + 0.25mg iprat", tc: C.acc }] : av ? [{ label: "≥5yr", text: "5mg salb + 0.5mg iprat", tc: C.acc }] : [{ label: "Need age", text: "—", tc: C.t3 }]} />
         <Drug name="Tranexamic Acid" conc="100mg/ml" rows={[{ label: "5–10mg/kg over 20min", mg: `${R(5 * w)}–${R(10 * w)}`, ml: `${R((5 * w) / 100)}–${R((10 * w) / 100)}` }, { label: "then 10mg/kg/hr infusion", mg: R(10 * w), ml: R((10 * w) / 100) }]} />
         <Drug name="Valproate" conc="100mg/ml" rows={[{ label: "Seizures 7–10mg/kg", mg: `${R(7 * w)}–${R(10 * w)}`, ml: `${R((7 * w) / 100)}–${R((10 * w) / 100)}` }, { label: "Status 20mg/kg/4min", mg: R(20 * w), ml: R((20 * w) / 100) }]} />
-      </Sec>
-
-      <Sec title="Vital Signs" icon="📊" warn={!av ? "Need age" : undefined}>
-        {av ? (
-          <div style={{ background: C.s1, borderRadius: 8, border: `1px solid ${C.bdr}`, padding: 10 }}>
-            <div style={{ fontSize: 10, fontWeight: 700, color: C.t2, marginBottom: 3 }}>Heart Rate (/min)</div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 3, marginBottom: 8 }}>
-              {["p1", "p10", "p50", "p90", "p99"].map((p) => (
-                <Badge key={p} l={p} v={vL(HR[p], aY, aM)} c={p === "p50" ? C.acc : C.t3} />
-              ))}
-            </div>
-            <div style={{ fontSize: 10, fontWeight: 700, color: C.t2, marginBottom: 3 }}>Resp Rate (/min)</div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 3, marginBottom: sex ? 8 : 0 }}>
-              {["p1", "p10", "p50", "p90", "p99"].map((p) => (
-                <Badge key={p} l={p} v={vL(RR[p], aY, aM)} c={p === "p50" ? C.grn : C.t3} />
-              ))}
-            </div>
-            {sex && (
-              <>
-                <div style={{ fontSize: 10, fontWeight: 700, color: C.t2, marginBottom: 3 }}>
-                  MAP mmHg — {sex === "1" ? "♂" : "♀"}
-                </div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
-                  {[["p2_5", "p2.5"], ["p16", "p16"], ["p50", "p50"], ["p84", "p84"], ["p97_5", "p97.5"]].map(
-                    ([k, l2]) => (
-                      <Badge key={k} l={l2} v={mL(w, parseInt(sex), k)} c={k === "p50" ? C.orn : C.t3} />
-                    ),
-                  )}
-                </div>
-              </>
-            )}
-            <div style={{ fontSize: 9, color: C.t3, marginTop: 8, lineHeight: 1.5 }}>
-              Premature MAP target ≈ gestational age (weeks). Systolic BP: neo–6mo 80–90 · 2–4yr 85–100 · 5–11yr 90–110 · &gt;12yr 100–120 mmHg.
-            </div>
-          </div>
-        ) : (
-          <Warn>Enter age for vital sign percentiles</Warn>
-        )}
       </Sec>
     </div>
   );
