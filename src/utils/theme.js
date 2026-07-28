@@ -28,9 +28,9 @@ export const C = {
   pink: "#f778ba",
 
   t1: "#e6edf3",
-  t2: "#8b949e",
-  t3: "#6e7681",
-  t4: "#484f58",
+  t2: "#98a1ab",
+  t3: "#7d8590",
+  t4: "#5b636d",
 };
 
 export const mono = "'JetBrains Mono','SF Mono','Menlo',monospace";

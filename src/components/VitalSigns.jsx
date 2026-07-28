@@ -2,12 +2,12 @@ import { HR, RR, vL, mL } from "../utils/vitals";
 import { C } from "../utils/theme";
 import { Badge, Sec } from "./UI";
 
-export default function VitalSigns({ w, age, sex }) {
+export default function VitalSigns({ w, age, sex, open = true }) {
   const aY = age?.years ?? 0,
     aM = age?.months ?? 0;
 
   return (
-    <Sec title="Vital Signs" icon="📊">
+    <Sec title="Vital Signs" icon="📊" defaultOpen={open}>
       <div style={{ background: C.s1, borderRadius: 8, border: `1px solid ${C.bdr}`, padding: 10 }}>
         <div style={{ fontSize: 10, fontWeight: 700, color: C.t2, marginBottom: 3 }}>Heart Rate (/min)</div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 3, marginBottom: 8 }}>

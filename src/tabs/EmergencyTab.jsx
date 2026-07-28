@@ -46,6 +46,7 @@ export default function EmergencyTab({ w, age }) {
           </div>
           <div style={{ fontSize: 9, color: C.t3, marginTop: 3 }}>&lt;5kg: ÷4 · ≥5kg: ÷6 · adult ÷10 (8.4% = 1mEq/ml)</div>
         </Drug>
+        <Drug name="Dantrolene (MH crisis)" conc="≈0.33mg/ml" rows={[{ label: "2.5mg/kg rapid IV, repeat ×3 PRN", mg: R(2.5 * w), ml: R((2.5 * w) / (20 / 60)) }]} note="Malignant hyperthermia · 20mg in 60ml sterile H₂O" />
       </Sec>
     </div>
   );
