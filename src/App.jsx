@@ -3,6 +3,10 @@ import { calcAge, ageStr, ageCat } from "./utils/helpers";
 import { C, sans } from "./utils/theme";
 import { Inp, Sel, Tag } from "./components/UI";
 import StdTab from "./tabs/StdTab";
+import InductionTab from "./tabs/InductionTab";
+import AnalgesiaTab from "./tabs/AnalgesiaTab";
+import FluidsTab from "./tabs/FluidsTab";
+import EmergencyTab from "./tabs/EmergencyTab";
 import AirwayTab from "./tabs/AirwayTab";
 import AddTab from "./tabs/AddTab";
 import InoTab from "./tabs/InoTab";
@@ -39,11 +43,15 @@ export default function App() {
 
   const tabs = [
     { id: "standard", l: "Standard", i: "💊" },
+    { id: "induction", l: "Induction", i: "😴" },
+    { id: "analgesia", l: "Analgesia", i: "🩹" },
+    { id: "emergency", l: "Emergency", i: "🚨" },
+    { id: "fluids", l: "Fluids", i: "💧" },
     { id: "airway", l: "Airway & Lines", i: "🫁" },
-    { id: "addendum", l: "Addendum", i: "🦠" },
     { id: "inotropy", l: "Inotropes", i: "❤️" },
     { id: "transfusion", l: "Transfusion", i: "🩸" },
     { id: "tiva", l: "TIVA", i: "🎯" },
+    { id: "addendum", l: "Addendum", i: "🦠" },
   ];
 
   return (
@@ -158,7 +166,7 @@ export default function App() {
           {sex === "2" && <Tag c={C.pink}>♀ Female</Tag>}
         </div>
 
-        {/* Tabs — 3×2 grid so all six fit with full labels on phones */}
+        {/* Tabs — 3-column grid so all tiles fit with full labels on phones */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 4, background: C.bg, borderRadius: 12, padding: 4 }}>
           {tabs.map((t) => {
             const active = tab === t.id;
@@ -200,6 +208,10 @@ export default function App() {
       {/* Content */}
       <div style={{ padding: "8px 14px 60px" }}>
         {tab === "standard" && <StdTab w={w} age={age} sex={sex} />}
+        {tab === "induction" && <InductionTab w={w} age={age} />}
+        {tab === "analgesia" && <AnalgesiaTab w={w} age={age} />}
+        {tab === "emergency" && <EmergencyTab w={w} age={age} />}
+        {tab === "fluids" && <FluidsTab w={w} age={age} />}
         {tab === "airway" && <AirwayTab w={w} age={age} ht={ht} />}
         {tab === "addendum" && <AddTab w={w} age={age} />}
         {tab === "inotropy" && <InoTab w={w} age={age} />}
