@@ -45,19 +45,6 @@ export default function StdTab({ w, age }) {
         </Drug>
       </Sec>
 
-      <Sec title="Local Anaesthetics" icon="💉">
-        <Drug name="Lidocaine" conc="10mg/ml" rows={[{ label: "Without adr: max 5mg/kg", mg: `max ${R(5 * w)}`, ml: `max ${R((5 * w) / 10)}` }, { label: "With adr: max 7mg/kg", mg: `max ${R(7 * w)}`, ml: `max ${R((7 * w) / 10)}` }]} />
-        <Drug name="Levobupivacaine" conc="2.5mg/ml" rows={[{ label: "Infiltration: max 2mg/kg", mg: `max ${R(2 * w)}`, ml: `max ${R((2 * w) / 2.5)}` }]} />
-        <Drug name="Ropivacaine" conc="5mg/ml" rows={[{ label: "Infiltration: max 2mg/kg", mg: `max ${R(2 * w)}`, ml: `max ${R((2 * w) / 5)}` }]} />
-      </Sec>
-
-      <Sec title="Regional & Neuraxial" icon="🧬" defaultOpen={false}>
-        <Drug name="Caudal (0.25% bupivacaine)" rows={[{ label: "Sacro-lumbar 0.5ml/kg", mg: R(0.5 * w), unit: "ml" }, { label: "Upper abdominal 1ml/kg", mg: R(w), unit: "ml" }, { label: "Mid-thoracic 1.2ml/kg", mg: R(1.2 * w), unit: "ml" }]} note="± clonidine 1µg/kg · mid-thoracic level not always reliable" />
-        <Drug name="Wound infusion catheter" rows={av && ay < 4 / 12 ? [{ label: "<4mo: 0.1% bupiv 0.1–0.2ml/kg/hr", mg: `${R(0.1 * w)}–${R(0.2 * w)}`, unit: "ml/hr" }] : [{ label: ">4mo: 0.2% bupiv 0.1–0.2ml/kg/hr", mg: `${R(0.1 * w)}–${R(0.2 * w)}`, unit: "ml/hr" }]} />
-        <Drug name="Epidural" rows={[{ label: "Space depth ≈ 1mm/kg", text: `${R(w, 1)}mm`, tc: C.acc }, { label: "Bolus 0.25% bupiv: thoracic 0.5 / lumbar 0.75 ml/kg", mg: `${R(0.5 * w)} / ${R(0.75 * w)}`, unit: "ml" }, av && ay >= 0.5 && w >= 5 ? { label: "Infusion 0.1% bupiv 0.1–0.4ml/kg/hr", mg: `${R(0.1 * w)}–${R(0.4 * w)}`, unit: "ml/hr" } : { label: "Infusion 0.1% bupiv 0.1–0.2ml/kg/hr (<6mo/<5kg)", mg: `${R(0.1 * w)}–${R(0.2 * w)}`, unit: "ml/hr" }]} note="Length in space 3–4cm · check toxic dose" />
-        <Drug name="Clysis (field block)" rows={[{ label: "Max 20ml/kg of dilute mix", mg: R(20 * w), unit: "ml" }]} note="10ml 0.5% bupiv + 1ml adrenaline 1:1000; take 4.5ml into 200ml N/S" />
-      </Sec>
-
       <Sec title="Other Medications" icon="🧪">
         <Drug name="Clonidine" conc="150µg/ml" rows={[{ label: "Premed 3–4µg/kg PO (90min pre)", mg: `${R(3 * w)}–${R(4 * w)}`, ml: `${R((3 * w) / 150)}–${R((4 * w) / 150)}`, unit: "µg" }, { label: "IV / caudal 1–2µg/kg", mg: `${R(w)}–${R(2 * w)}`, ml: `${R(w / 150)}–${R((2 * w) / 150)}`, unit: "µg" }]} />
         <Drug name="Diazepam" conc="5mg/ml" rows={[{ label: "Seizures 0.1–1mg/kg (max 20)", mg: `${R(cap(0.1, w, 20))}–${R(cap(1, w, 20))}`, ml: `${R(cap(0.1, w, 20) / 5)}–${R(cap(1, w, 20) / 5)}` }]} />
