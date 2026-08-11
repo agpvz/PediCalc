@@ -282,6 +282,32 @@ export const Warn = ({ children }) => (
   </div>
 );
 
+/** Fixed colours per administration route so PO/IV/IM/PR read at a glance */
+const ROUTE_C = { PO: C.grn, IV: C.acc, IM: C.orn, PR: C.vio, IN: C.pink, SC: C.t2, NEB: C.t2 };
+
+export const RouteChip = ({ r }) => (
+  <span
+    style={{
+      fontSize: 10,
+      fontWeight: 800,
+      fontFamily: mono,
+      color: ROUTE_C[r] || C.t2,
+      background: `${ROUTE_C[r] || C.t2}1a`,
+      border: `1px solid ${ROUTE_C[r] || C.t2}40`,
+      borderRadius: 5,
+      padding: "1px 6px",
+      marginRight: 6,
+      letterSpacing: ".03em",
+      whiteSpace: "nowrap",
+      display: "inline-block",
+      minWidth: 26,
+      textAlign: "center",
+    }}
+  >
+    {r}
+  </span>
+);
+
 export function Drug({ name, conc, rows, note, children, defaultOpen = false }) {
   const ex = !!children;
   const [open, setOpen] = useState(defaultOpen);
@@ -349,6 +375,7 @@ export function Drug({ name, conc, rows, note, children, defaultOpen = false }) 
             }}
           >
             <span style={{ fontSize: 12, color: C.t2, flex: 1, minWidth: 100, lineHeight: 1.4 }}>
+              {r.route && <RouteChip r={r.route} />}
               {r.label}
             </span>
             <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
