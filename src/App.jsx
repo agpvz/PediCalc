@@ -12,6 +12,7 @@ import FluidsTab from "./tabs/FluidsTab";
 import EmergencyTab from "./tabs/EmergencyTab";
 import RegionalTab from "./tabs/RegionalTab";
 import AirwayTab from "./tabs/AirwayTab";
+import VentTab from "./tabs/VentTab";
 import AddTab from "./tabs/AddTab";
 import InoTab from "./tabs/InoTab";
 import TransTab from "./tabs/TransTab";
@@ -100,6 +101,7 @@ export default function App() {
     { id: "fluids", l: "Fluids", i: "💧" },
     { id: "regional", l: "Regional", i: "💉" },
     { id: "airway", l: "Airway & Lines", i: "🫁" },
+    { id: "vent", l: "Ventilation", i: "🌬️" },
     { id: "inotropy", l: "Inotropes", i: "❤️" },
     { id: "transfusion", l: "Transfusion", i: "🩸" },
     { id: "tiva", l: "TIVA", i: "🎯" },
@@ -526,6 +528,7 @@ export default function App() {
               {tab === "fluids" && <FluidsTab w={w} age={age} />}
               {tab === "regional" && <RegionalTab w={w} age={age} />}
               {tab === "airway" && <AirwayTab w={w} age={age} ht={ht} />}
+              {tab === "vent" && <VentTab w={w} age={age} />}
               {tab === "addendum" && <AddTab w={w} age={age} />}
               {tab === "inotropy" && <InoTab w={w} age={age} />}
               {tab === "transfusion" && <TransTab w={w} age={age} />}

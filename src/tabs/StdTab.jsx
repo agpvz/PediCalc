@@ -55,7 +55,6 @@ export default function StdTab({ w, age }) {
         <Drug name="MgSO₄" conc="0.3g/ml" rows={[{ label: "40mg/kg slow IV", mg: R(40 * w), ml: R((40 * w) / 300) }]} />
         <Drug name="Mannitol 20%" rows={[{ label: "0.25–0.5g/kg/20min", mg: `${R(0.25 * w)}–${R(0.5 * w)}`, ml: `${R((0.25 * w) / 0.2)}–${R((0.5 * w) / 0.2)}`, unit: "g" }]} />
         <Drug name="Naloxone" conc="0.4mg/ml" rows={[{ label: "Post-op sedation 2µg/kg", mg: R(2 * w), ml: R((2 * w) / 400, 3), unit: "µg" }]} note="Repeat q2min PRN" />
-        <Drug name="Cefazolin" conc="100mg/ml" rows={[{ label: "50mg/kg (max 2g) q8h", mg: R(cap(50, w, 2000)), ml: R(cap(50, w, 2000) / 100) }]} />
         <Drug name="Salbutamol + Ipratropium" conc="aerosol" rows={av && ay < 5 ? [{ label: "<5yr", text: "2.5mg salb + 0.25mg iprat", tc: C.acc }] : av ? [{ label: "≥5yr", text: "5mg salb + 0.5mg iprat", tc: C.acc }] : [{ label: "Need age", text: "—", tc: C.t3 }]} />
         <Drug name="Tranexamic Acid" conc="100mg/ml" rows={[{ label: "5–10mg/kg over 20min", mg: `${R(5 * w)}–${R(10 * w)}`, ml: `${R((5 * w) / 100)}–${R((10 * w) / 100)}` }, { label: "then 10mg/kg/hr infusion", mg: R(10 * w), ml: R((10 * w) / 100) }]} />
         <Drug name="Valproate" conc="100mg/ml" rows={[{ label: "Seizures 7–10mg/kg", mg: `${R(7 * w)}–${R(10 * w)}`, ml: `${R((7 * w) / 100)}–${R((10 * w) / 100)}` }, { label: "Status 20mg/kg/4min", mg: R(20 * w), ml: R((20 * w) / 100) }]} />
