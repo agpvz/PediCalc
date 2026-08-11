@@ -64,7 +64,6 @@ export const DRUG_INDEX = [
   { n: "Magnesium (MgSO₄)", t: "standard" },
   { n: "Mannitol 20%", t: "standard" },
   { n: "Naloxone", t: "standard" },
-  { n: "Cefazolin", t: "standard" },
   { n: "Salbutamol + Ipratropium", t: "standard" },
   { n: "Tranexamic acid", t: "standard" },
   { n: "Valproate", t: "standard" },
@@ -74,6 +73,13 @@ export const DRUG_INDEX = [
   { n: "Defibrillation energy", t: "airway" },
   { n: "Cardioversion energy", t: "airway" },
   { n: "CVC size & depth", t: "airway" },
+  // Ventilation
+  { n: "Ventilator settings", t: "vent" },
+  { n: "Tidal volume", t: "vent" },
+  { n: "Respiratory rate (ventilator)", t: "vent" },
+  { n: "PEEP", t: "vent" },
+  { n: "PCV / VCV pressures", t: "vent" },
+  { n: "I:E ratio & inspiratory time", t: "vent" },
   // Inotropes
   { n: "Adrenaline infusion", t: "inotropy" },
   { n: "Noradrenaline infusion", t: "inotropy" },
@@ -94,6 +100,7 @@ export const DRUG_INDEX = [
   { n: "Ketamine TIVA", t: "tiva" },
   // Abx & Misc
   { n: "Amikacin", t: "addendum" },
+  { n: "Cefazolin", t: "addendum" },
   { n: "Amoxicillin (+Clav)", t: "addendum" },
   { n: "Ceftazidime", t: "addendum" },
   { n: "Clindamycin", t: "addendum" },

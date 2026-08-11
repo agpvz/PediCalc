@@ -17,6 +17,7 @@ export default function AddTab({ w, age }) {
       <Sec title="Antibiotics" icon="🦠">
         <Drug name="Amikacin" conc="250mg/ml" rows={[...(av && ay < 2 / 12 && w < 5 ? [{ label: "Premature 15–20mg/kg", mg: `${R(15 * w)}–${R(20 * w)}`, ml: `${R((15 * w) / 250)}–${R((20 * w) / 250)}` }] : []), { label: "Term–18yr: 15mg/kg q24h", mg: R(15 * w), ml: R((15 * w) / 250) }]} />
         <Drug name="Amoxicillin (+Clav)" conc="100mg/ml" rows={[{ label: "Infections 25mg/kg (+2.5)", mg: `${R(25 * w)} (+${R(2.5 * w)})`, ml: R((25 * w) / 100) }, { label: "Endocarditis ppx 50mg/kg", mg: R(50 * w), ml: R((50 * w) / 100) }]} />
+        <Drug name="Cefazolin" conc="100mg/ml" rows={[{ label: "IV 50mg/kg (max 2g) q8h", mg: R(Math.min(50 * w, 2000)), ml: R(Math.min(50 * w, 2000) / 100) }]} note="Surgical prophylaxis" />
         <Drug name="Ceftazidime" conc="100mg/ml" rows={[{ label: "CF 66.6mg/kg q8h", mg: R(66.6 * w), ml: R((66.6 * w) / 100) }]} note="Max 12g/day" />
         <Drug name="Clindamycin" conc="150mg/ml" rows={[{ label: "10mg/kg (max 600) q8h", mg: R(10 * w), ml: R((10 * w) / 150) }]} />
         <Drug name="Metronidazole" conc="5mg/ml" rows={av && ay < 1 / 12 ? [{ label: "<1mo: 15mg/kg", mg: R(15 * w), ml: R((15 * w) / 5) }] : [{ label: "≥1mo: 30mg/kg", mg: R(30 * w), ml: R((30 * w) / 5) }]} />
